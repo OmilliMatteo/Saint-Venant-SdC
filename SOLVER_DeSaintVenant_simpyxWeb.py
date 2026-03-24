@@ -690,7 +690,7 @@ class CrossSection:
 
         for el in self.elements:
             ax.plot([self.ev(el.n1.x, subs_dict), self.ev(el.n2.x, subs_dict)], 
-                    [self.ev(el.n1.y, subs_dict), self.ev(el.n2.y, subs_dict)], color='k', linewidth=4, solid_capstyle='round')
+                    [self.ev(el.n1.y, subs_dict), self.ev(el.n2.y, subs_dict)], color='k', linewidth=self.ev(el.t, subs_dict), solid_capstyle='round')
 
             tau_sym = tau_results_sym[el.id]['val']
             tau_num = self.ev(tau_sym, subs_dict)
