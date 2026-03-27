@@ -9,15 +9,15 @@ def sym_ex(expr):
     if expr is None or str(expr).strip() == "":
         return None
     if isinstance(expr, str):
-        # Diciamo a SymPy quali variabili sono strettamente POSITIVE 
-        # (fondamentale per semplificare le radici quadrate delle lunghezze!)
+        #  
+        # 
         variabili_sicure = {
             'N': sp.Symbol('N'), 
             'T': sp.Symbol('T'),
             'I': sp.Symbol('I'), 
             'E': sp.Symbol('E'),
-            'b': sp.Symbol('b', positive=True), # <--- ECCO IL TRUCCO
-            't': sp.Symbol('t', positive=True)  # <--- ECCO IL TRUCCO
+            'b': sp.Symbol('b', positive=True), 
+            't': sp.Symbol('t', positive=True)  
         }
         expr = sp.sympify(expr, locals=variabili_sicure)
     
@@ -53,7 +53,7 @@ class Element:
 
     @property
     def center_of_gravity(self):
-        # Uso sp.Rational(1,2) al posto di / 2 per evitare la nascita di float
+        # sp.Rational(1,2) al posto di / 2 per evitare la nascita di float
         return (sym_ex((self.n1.x + self.n2.x) * sp.Rational(1, 2)), 
                 sym_ex((self.n1.y + self.n2.y) * sp.Rational(1, 2)))
 
@@ -863,7 +863,7 @@ with col_output:
             finto_terminale = io.StringIO()
             
             with redirect_stdout(finto_terminale):
-                sezione.print_recap() # <--- Aggiunto per avere il recap geometrico!
+                sezione.print_recap() 
                 fig, axs = plt.subplots(2, 2, figsize=(16, 14))
                 sezione.plot_loads_summary(carichi, axs[0, 0], subs_dict)
                 sezione.solve_navier(carichi, axs[0, 1], subs_dict)
@@ -878,7 +878,7 @@ with col_output:
                 st.pyplot(fig)
                 
             with tab_testo:
-                # Stampiamo il testo catturato usando un blocco di codice per mantenere l'impaginazione
+                # 
                 st.code(finto_terminale.getvalue(), language="text")
 
         except Exception as e:
